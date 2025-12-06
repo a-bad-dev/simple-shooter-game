@@ -3,3 +3,4 @@ TODO:
 - Non-hardcoded maps
 - Fix the alive_players variable not working right
 - A bigger and better map, ideally with hills, few trees, no caves, some rivers, big villages here and there, and 500x500 size
+- Random loot spawning in chests in predefined places (inside houses)
