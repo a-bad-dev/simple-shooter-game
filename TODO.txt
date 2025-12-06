@@ -14,3 +14,4 @@ TODO:
 - Polish the game
 - Rewrite the main mod from scratch (less than 100 lines, should be easy)
 - A scoring system with leaderboards
+- Don't override every node's groups, instead just add `fall_damage_add_percent = -100`
