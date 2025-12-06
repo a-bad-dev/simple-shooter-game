@@ -12,4 +12,4 @@ TODO:
 - Make guns zoom in with a crosshair while rightclick is held
 - Header, screenshot, and icon
 - Polish the game
-- Rewrite the main mod from scratch (less than 1k lines, should be easy)
+- Rewrite the main mod from scratch (less than 100 lines, should be easy)
