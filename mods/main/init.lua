@@ -209,7 +209,7 @@ core.register_chatcommand("reset", {
 
 			player:set_nametag_attributes({color = {a = 255, r = 255, g = 255, b = 255}})
 			player:set_pos({x = 20, y = 26.5, z = 17})
-			core.change_player_privs(player:get_player_name(), {["fly"] = false, ["fast"] = false, ["noclip"] = false, ["shout"] = true, ["interact"] = true})
+			set_player_mode(player, "normal")
 			player:get_inventory():set_list("main", {})
 			player:set_properties({
 				visual = "mesh",
