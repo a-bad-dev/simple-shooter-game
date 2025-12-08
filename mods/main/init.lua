@@ -18,7 +18,7 @@ local function load_player_data(player)
 	})
 end
 
-local function set_player_mode(player, mode)
+function set_player_mode(player, mode)
 	local name = player:get_player_name()
     local privs = core.get_player_privs(name)
 	local meta = player:get_meta()
@@ -41,6 +41,7 @@ local function set_player_mode(player, mode)
 
 		meta:set_string("mode", "normal")
  
+	-- add pre_match mode?
     elseif mode == "spectator" then
         privs.fly = true
         privs.fast = true
@@ -57,12 +58,14 @@ local function set_player_mode(player, mode)
 			visual_size = {x=0, y=0},
 		})
 
+		player:set_nametag_attributes({color = {a = 0}})
+
 		core.chat_send_player(name, core.colorize("cyan", "You are now a spectator."))
 
 		meta:set_string("mode", "spectator")
     end
  
-    core.set_player_privs(name, privs)
+    core.change_player_privs(name, privs)
 end
 
 local function get_alive_players()
