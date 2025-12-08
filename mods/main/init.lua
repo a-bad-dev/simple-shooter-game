@@ -1,11 +1,12 @@
 player_data = {}
 alive_players = {}
 
-core.register_on_mods_loaded(function()
-	for itemname, _ in pairs(core.registered_nodes) do
-		core.override_item(itemname, {groups = {fall_damage_add_percent = -100}})
-	end
-end)
+core.register_on_player_hpchange(function(player, hp_change, reason)
+    if reason.type == "fall" then
+        return 0, true  -- cancel fall damage and stop further processing
+    end
+    return hp_change
+end, true)
 
 core.register_on_joinplayer(function(player) 
 	core.place_schematic({x = 0, y = 0, z = 0}, core.get_modpath("main") .. "/schematics/map1.mts", 0, nil, false)
