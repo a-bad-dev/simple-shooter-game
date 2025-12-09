@@ -5,7 +5,7 @@ function place_map(map)
 	for x = 1, map_data.size_x do -- preset the area to air to avoid any problems with preexisting maps
 		for y = 1, map_data.size_y do
 			for z = 1, map_data.size_z do
-				core.set_node({x=x, y=y, z=z}, {name = "air"}) -- maybe switch to core.bulk_set_node()?
+				core.set_node({x=x-1, y=y-1, z=z-1}, {name = "air"}) -- maybe switch to core.bulk_set_node()?
 			end
 		end
 	end
