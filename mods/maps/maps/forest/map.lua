@@ -1,13 +1,13 @@
 local map_data = {
-	size_x = 0,
-	size_y = 0, -- <- currently not used for anything
-	size_z = 0,
+	size_x = 155,
+	size_y = 53,
+	size_z = 147,
 	
-	barrier_level = 0, -- <- Y level of the barrier
+	barrier_level = 49, -- <- Y level of the barrier
 	
-	spawn_x = 0,
-	spawn_y = 0,
-	spawn_z = 0
+	spawn_x = nil,
+	spawn_y = nil,
+	spawn_z = nil
 }
 
 return map_data
