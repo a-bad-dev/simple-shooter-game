@@ -129,7 +129,15 @@ core.register_on_joinplayer(function(player)
 	player:set_pos({x=5, y=-9.6, z=8})
 	player:get_inventory():set_list("main", {})
 
+	player:set_inventory_formspec([[
+    		size[8,4]
+    		list[current_player;main;0,0;8,1;]
+    		list[current_player;main;0,1.25;8,3;8]
+    		listring[current_player;main]
+	]])
+
 	local player_name = player:get_player_name()
+	
 	player_data[player_name] = {
 		size = player:get_properties().visual_size,
 		skin = player:get_properties().textures,
