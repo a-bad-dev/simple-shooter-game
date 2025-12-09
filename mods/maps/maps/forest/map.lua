@@ -9,3 +9,5 @@ local map_data = {
 	spawn_y = 0,
 	spawn_z = 0
 }
+
+return map_data
