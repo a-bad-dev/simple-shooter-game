@@ -183,7 +183,7 @@ core.register_chatcommand("start", {
 
 			player:set_nametag_attributes({color = {a = 0}})
 			player:set_hp(20)
-
+			player:set_pos({x=map_data.spawn_x, y=map_data.spawn_y, z=map_data.spawn_z})
 			player:set_properties({
 				pointable = true, -- allow players to be killable after the match starts
 			})
