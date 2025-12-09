@@ -125,7 +125,7 @@ core.register_on_mods_loaded(function()
 end)
 
 core.register_on_joinplayer(function(player) 
-	player:set_pos({x = map_data.spawn_x, y = map_data.spawn_y, z = map_data.spawn_z})
+	player:set_pos({x=0, y=0, z=0})
 	player:get_inventory():set_list("main", {})
 
 	local player_name = player:get_player_name()
@@ -172,8 +172,8 @@ core.register_chatcommand("start", {
 	privs = {match_manager = true},
 	description = "Start the match",
 	func = function()
-		local map_data = place_map(map)
-		remove_barrier(x=map_data.size_x, y=map_data.barrier_level, z=map_data.size_z)
+		map_data = place_map(map)
+		remove_barrier(map_data.size_x, map_data.barrier_level, map_data.size_z)
 		core.chat_send_all(core.colorize("green", "Match started!"))
 		alive_players = {}
 		for _, player in pairs(core.get_connected_players()) do

@@ -3,7 +3,7 @@ function place_map(map)
 	core.place_schematic({x=0, y=0, z=0}, map_path .. map .. "/map.mts", 0, nil, false)
 	local map_data = dofile(map_path .. map .. "/map.lua")
 	
-	if map_data.spawn_x == nil or map_data.spawn_y == nil or map_data.spawn_z == nil do -- set a default spawnpoint if not set
+	if map_data.spawn_x == nil or map_data.spawn_y == nil or map_data.spawn_z == nil then -- set a default spawnpoint if not set
 		map_data.spawn_x = map_data.size_x / 2
 		map_data.spawn_y = map_data.barrier_level + 1
 		map_data.spawn_z = map_data.size_z / 2
