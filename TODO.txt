@@ -1,17 +1,12 @@
+Lines starting with "!" are high priority
 TODO:
 
-- Non-hardcoded maps
-- More maps
-- GUIs to do everything
-- Inventory
-- Put privilege restrictions on chatcommands
-- Fix the alive_players variable not working right
-- A bigger and better map, ideally with hills, few trees, no caves, some rivers, big villages here and there, and 500x500 size
-- Random loot spawning in chests in predefined places (inside houses)
-- Add a proper licence and give credit to the creators of the mods used
-- Make guns zoom in with a crosshair while rightclick is held
-- Header, screenshot, and icon
-- Polish the game
-- Rewrite the main mod from scratch (less than 100 lines, should be easy)
-- A scoring system with leaderboards
-- Don't override every node's groups, instead just add `fall_damage_add_percent = -100`
+-- GUIs to do everything
+-- Improve the maps by adding structures
+-- Random loot spawning in chests in predefined places (inside houses)
+!- Add a proper licence and give credit to the creators of the mods used
+!- Make guns zoom in with a crosshair while rightclick is held
+-- Header, screenshot, and icon
+-- Polish the game
+-- Rewrite the main mod from scratch with higher code standards
+-- A scoring system with leaderboards
