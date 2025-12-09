@@ -223,7 +223,6 @@ core.register_chatcommand("reset", {
 	func = function()
 		for _, player in pairs(core.get_connected_players()) do
 			local player_name = player:get_player_name()
-			player:set_nametag_attributes({color = {a = 255, r = 255, g = 255, b = 255}})
 			player:set_pos({x = map_data.spawn_x, y = map_data.spawn_y, z = map_data.spawn_z})
 			set_player_mode(player, "normal")
 			player:get_inventory():set_list("main", {})
