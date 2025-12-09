@@ -167,30 +167,40 @@ end)
 
 core.register_privilege("match_manager", {description = "Can manage the match", give_to_singleplayer = true})
 
-core.register_chatcommand("start", {
+core.register_chatcommand("load", {
 	params = "<map>",
 	privs = {match_manager = true},
-	description = "Start the match",
+	description = "Load a map",
 	func = function(_, param)
 		map_data = place_map(param)
+		for _, player in pairs(core.get_connected_players()) do
+			local player_name = player:get_player_name()
+			set_player_mode(player, "normal")
+			player:set_nametag_attributes({color = {a = 0}})
+			player:set_hp(20)
+			
+			player:set_pos({x=map_data.spawn_x, y=map_data.spawn_y, z=map_data.spawn_z})
+
+		end
+	end
+})
+
+core.register_chatcommand("start", {
+	params = "",
+	privs = {match_manager = true},
+	description = "Start the match",
+	func = function()
 		remove_barrier(map_data.size_x, map_data.barrier_level, map_data.size_z)
 		core.chat_send_all(core.colorize("green", "Match started!"))
 		alive_players = {}
 		for _, player in pairs(core.get_connected_players()) do
 			local player_name = player:get_player_name()
-
-			set_player_mode(player, "normal")
-
-			player:set_nametag_attributes({color = {a = 0}})
-			player:set_hp(20)
-			player:set_pos({x=map_data.spawn_x, y=map_data.spawn_y, z=map_data.spawn_z})
-			player:set_properties({
-				pointable = true, -- allow players to be killable after the match starts
-			})
-
 			inv = player:get_inventory()
 			inv:add_item("main", "ctf_ranged:ak47_loaded")
 			inv:add_item("main", "ctf_ranged:ammo 3")
+			player:set_properties({
+				pointable = true, -- allow players to be killable after the match starts
+			})
 			alive_players[player_name] = "alive"
 		end
 		return ""
