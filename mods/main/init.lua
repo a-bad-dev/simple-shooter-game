@@ -171,8 +171,8 @@ core.register_chatcommand("start", {
 	params = "<map>",
 	privs = {match_manager = true},
 	description = "Start the match",
-	func = function()
-		map_data = place_map(map)
+	func = function(_, param)
+		map_data = place_map(param)
 		remove_barrier(map_data.size_x, map_data.barrier_level, map_data.size_z)
 		core.chat_send_all(core.colorize("green", "Match started!"))
 		alive_players = {}
