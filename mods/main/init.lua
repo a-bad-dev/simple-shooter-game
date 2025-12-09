@@ -125,8 +125,7 @@ core.register_on_mods_loaded(function()
 end)
 
 core.register_on_joinplayer(function(player) 
-	core.place_schematic({x = 0, y = 0, z = 0}, core.get_modpath("main") .. "/schematics/map1.mts", 0, nil, false)
-	player:set_pos({x = 20, y = 26.5, z = 17})
+	player:set_pos({x = map_data.spawn_x, y = map_data.spawn_y, z = map_data.spawn_z})
 	player:get_inventory():set_list("main", {})
 
 	local player_name = player:get_player_name()
@@ -157,7 +156,7 @@ core.register_on_respawnplayer(function(player)
 
 	local player_name = player:get_player_name()
 
-	player:set_pos({x = 20, y = 26.5, z = 17})
+	player:set_pos({x = map_data.spawn_x, y = map_data.spawn_y, z = map_data.spawn_z})
 
 	player:get_inventory():set_list("main", {})
 	
@@ -169,15 +168,12 @@ end)
 core.register_privilege("match_manager", {description = "Can manage the match", give_to_singleplayer = true})
 
 core.register_chatcommand("start", {
-	params = "",
+	params = "<map>",
 	privs = {match_manager = true},
 	description = "Start the match",
 	func = function()
-		for x = 1, 39 do
-			for z = 1, 36 do
-				core.set_node({x = x, y = 25, z = z}, {name = "air"})
-			end
-		end
+		local map_data = place_map(map)
+		remove_barrier(x=map_data.size_x, y=map_data.barrier_level, z=map_data.size_z)
 		core.chat_send_all(core.colorize("green", "Match started!"))
 		alive_players = {}
 		for _, player in pairs(core.get_connected_players()) do
@@ -206,12 +202,10 @@ core.register_chatcommand("reset", {
 	privs = {match_manager = true},
 	description = "Reset map",
 	func = function()
-		core.place_schematic({x = 0, y = 0, z = 0}, core.get_modpath("main") .. "/schematics/map1.mts", 0, nil, false)
 		for _, player in pairs(core.get_connected_players()) do
 			local player_name = player:get_player_name()
-
 			player:set_nametag_attributes({color = {a = 255, r = 255, g = 255, b = 255}})
-			player:set_pos({x = 20, y = 26.5, z = 17})
+			player:set_pos({x = map_data.spawn_x, y = map_data.spawn_y, z = map_data.spawn_z})
 			set_player_mode(player, "normal")
 			player:get_inventory():set_list("main", {})
 			player:set_properties({
