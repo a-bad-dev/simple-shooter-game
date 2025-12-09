@@ -124,8 +124,9 @@ core.register_on_mods_loaded(function()
 	end
 end)
 
-core.register_on_joinplayer(function(player) 
-	player:set_pos({x=0, y=0, z=0})
+core.register_on_joinplayer(function(player)
+	core.place_schematic({x=0, y=1000, z=0}, core.get_modpath("main") .. "/schems/spawn.mts", 0, nil, false)
+	player:set_pos({x=5, y=1000.6, z=8})
 	player:get_inventory():set_list("main", {})
 
 	local player_name = player:get_player_name()
