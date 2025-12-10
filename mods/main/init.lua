@@ -1,20 +1,13 @@
-local player_data = {}
 local alive_players = {}
 
 local function save_player_data(player)
-	local name = player:get_player_name()
-	player_data[name] = {
-		size = player:get_properties().visual_size,
-		skin = player:get_properties().textures,
-	}
+	player:get_meta():set_string("skin", core.serialize(player:get_properties().textures))
 end
 
 local function load_player_data(player)
-	local name = player:get_player_name()
 	player:set_properties({
 		visual = "mesh",
-		textures = player_data[name].skin,
-		visual_size = player_data[name].size,
+		textures = 	core.deserialize(player:get_meta():get_string("skin"))
 	})
 end
 
@@ -55,7 +48,6 @@ function set_player_mode(player, mode)
 			pointable = false,
 			visual = "mesh",
 			textures = {"blank.png"},
-			visual_size = {x=0, y=0},
 		})
 
 		player:set_nametag_attributes({color = {a = 0}})
@@ -135,14 +127,6 @@ core.register_on_joinplayer(function(player)
     		list[current_player;main;0,1.25;8,3;8]
     		listring[current_player;main]
 	]])
-
-	local player_name = player:get_player_name()
-	
-	player_data[player_name] = {
-		size = player:get_properties().visual_size,
-		skin = player:get_properties().textures,
-	}
-
 	player:set_properties({pointable = false})
 
 	set_player_mode(player, "normal")
@@ -230,11 +214,9 @@ core.register_chatcommand("reset", {
 			player:get_inventory():set_list("main", {})
 			player:set_properties({
 				visual = "mesh",
-				textures = player_data[player_name].skin,
-				visual_size = player_data[player_name].size,
+				textures = core.deserialize(player:get_meta():get_string("skin")),
 				pointable=false,
 			})
-			player_data[player_name] = {}
 		end
 		core.chat_send_all(core.colorize("red", "Match terminated."))
 		return ""

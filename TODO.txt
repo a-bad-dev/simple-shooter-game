@@ -1,6 +1,7 @@
 Lines starting with "!" are high priority
 TODO:
 
+!- Fix players turning into GreenBlob for some reason
 -- GUIs to do everything
 -- Improve the maps by adding structures
 -- Random loot spawning in chests in predefined places (inside houses)
