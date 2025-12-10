@@ -10,3 +10,4 @@ TODO:
 -- Polish the game
 -- Rewrite the main mod from scratch with higher code standards
 -- A scoring system with leaderboards
+-- Implement configurable teams

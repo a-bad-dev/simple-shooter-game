@@ -206,7 +206,9 @@ core.register_chatcommand("start", {
 			local player_name = player:get_player_name()
 			inv = player:get_inventory()
 			inv:add_item("main", "ctf_ranged:ak47_loaded")
-			inv:add_item("main", "ctf_ranged:ammo 3")
+			inv:add_item("main", "ctf_ranged:remington870_loaded")
+			inv:add_item("main", "ctf_ranged:glock17_loaded")
+			inv:add_item("main", "ctf_ranged:ammo 50")
 			player:set_properties({
 				pointable = true, -- allow players to be killable after the match starts
 			})
