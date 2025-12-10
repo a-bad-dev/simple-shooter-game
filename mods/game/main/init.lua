@@ -322,7 +322,9 @@ core.register_globalstep(function(dtime)
 	if timer >= 10 then
 		timer = 0
 		for _, player in pairs(core.get_connected_players()) do
-			player:set_hp(math.min(player:get_hp() + 2, 20))
+			if alive_players[name] == "alive" then
+				player:set_hp(math.min(player:get_hp() + 2, 20))
+			end
 		end
 	end
 end)
