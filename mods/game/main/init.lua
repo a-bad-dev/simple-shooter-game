@@ -43,7 +43,7 @@ function give_player_items(player)
 	inv:set_list("main", {})
 
 	if class == "sniper" then
-		inv:add_item("main", "ctf_ranged:svd_loaded")
+		inv:add_item("main", "ctf_ranged:m200_loaded")
 		inv:add_item("main", "default:sword_steel")
 		inv:add_item("main", "ctf_ranged:ammo 100")
 	elseif class == "assault" then
@@ -153,6 +153,12 @@ function start_match()
 		player:set_pos({x = map_data.spawn_x, y = map_data.spawn_y, z = map_data.spawn_z})
 
 		player:set_hp(20)
+	end
+
+	for i = 10, 1, -1 do -- count down from 10 to 1 (yes you are free to set me on fire for this horrible solution)
+		core.after(20 + i, function()
+			core.chat_send_all(core.colorize("green", "Match starts in " .. (11 - i) .. " seconds."))
+		end)
 	end
 
 	core.after(30, function()
@@ -307,6 +313,18 @@ core.register_on_respawnplayer(function(player)
 	end
 
 	return true
+end)
+
+local timer = 0
+core.register_globalstep(function(dtime)
+	timer = timer + dtime
+
+	if timer >= 10 then
+		timer = 0
+		for _, player in pairs(core.get_connected_players()) do
+			player:set_hp(math.min(player:get_hp() + 2, 20))
+		end
+	end
 end)
 
 core.register_on_player_receive_fields(function(player, formname, fields)
