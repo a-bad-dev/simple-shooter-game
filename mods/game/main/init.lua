@@ -124,8 +124,6 @@ function set_player_mode(player, mode)
     		listring[current_player;main]
 		]])
 
-		give_player_items(player)
-
 		player:hud_set_flags({
 			hotbar = true,
 			healthbar = false,
@@ -149,6 +147,7 @@ function start_match()
 
 	for _, player in pairs(core.get_connected_players()) do
 		set_player_mode(player, "pre_match")
+		give_player_items(player)
 
 		player:set_pos({x = map_data.spawn_x, y = map_data.spawn_y, z = map_data.spawn_z})
 
@@ -188,6 +187,10 @@ function start_match()
 end
 
 function end_match()
+	if match_state == "pre_match" or match_state == "not_started" or match_state == "post_match" then
+		return false
+	end
+
 	set_match_state("not_started")
 
 	for _, player in pairs(core.get_connected_players()) do
@@ -206,6 +209,8 @@ function end_match()
 
 		set_player_mode(player, "normal")
 	end
+
+	return true
 end
 
 function set_match_state(state)
@@ -284,6 +289,10 @@ core.register_on_joinplayer(function(player)
     		listring[current_player;main]
 	]])
 	player:set_properties({pointable = false})
+
+	if player:get_meta():get_string("class") == "" then
+		player:get_meta():set_string("class", "assault")
+	end
 
 	set_player_mode(player, "normal")
 end)
@@ -372,5 +381,21 @@ core.register_chatcommand("start", {
 	func = function()
 		start_match()
 		return true, "-!- Match started!"
+	end
+})
+
+core.register_chatcommand("reset", {
+	params = "",
+	privs = {match_manager = true},
+	description = "Terminate the match",
+	func = function()
+		local success = end_match()
+		if success then
+			core.chat_send_all(core.colorize("red", "Match Terminated"))
+
+			return true
+		end
+
+		return false, "Match Cannot be terminated at the moment"
 	end
 })
