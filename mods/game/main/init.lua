@@ -44,7 +44,7 @@ function give_player_items(player)
 
 	if class == "sniper" then
 		inv:add_item("main", "ctf_ranged:m200_loaded")
-		inv:add_item("main", "default:sword_steel")
+		inv:add_item("main", "default:sword_stone")
 		inv:add_item("main", "ctf_ranged:ammo 100")
 	elseif class == "assault" then
 		inv:add_item("main", "ctf_ranged:ak47_loaded")
@@ -286,6 +286,11 @@ core.register_on_joinplayer(function(player)
 	]])
 	player:set_properties({pointable = false})
 
+	player:set_hud_flags({
+		minimap = false,
+		minimap_radar = false,
+	})
+
 	if player:get_meta():get_string("class") == "" then
 		player:get_meta():set_string("class", "assault")
 	end
@@ -362,6 +367,10 @@ core.register_chatcommand("load", {
 	func = function(_, param)
 		if not param or param == "" then
 			return false, "-!- You must specify a map name!"
+		end
+
+		if match_state == "pre_match" or match_state == "post_match" or match_state == "in_progress" then
+			return false, "-!- Match is already in progress!"
 		end
 
 		map_data = place_map(param)
