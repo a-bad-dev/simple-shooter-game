@@ -52,7 +52,7 @@ function give_player_items(player)
 		inv:add_item("main", "ctf_ranged:ammo 100")
 	elseif class == "shotgun" then
 		inv:add_item("main", "ctf_ranged:benelli_loaded")
-		inv:add_item("main", "ctf_ranged:makarov_loaded")
+		inv:add_item("main", "ctf_ranged:glock17_loaded")
 		inv:add_item("main", "ctf_ranged:ammo 100")
 	end
 end
@@ -69,7 +69,7 @@ function set_player_mode(player, mode)
 		})
 
 		load_player_data(player)
-		privs.noclip, privs.fast, privs.fly = false, false, false
+		privs.noclip, privs.fast, privs.fly, privs.interact = false, false, false, true
 
 		playertag.set(player, playertag.TYPE_ENTITY, {a = 255, r = 255, g = 255, b = 255})
 
@@ -86,7 +86,7 @@ function set_player_mode(player, mode)
 			breathbar = true,
 		})		
 	elseif mode == "spectator" then
-		privs.noclip, privs.fast, privs.fly = true, true, true
+		privs.noclip, privs.fast, privs.fly, privs.interact = true, true, true, false
 
 		make_player_invisible(player)
 
@@ -106,7 +106,7 @@ function set_player_mode(player, mode)
 		})
 
 	elseif mode == "pre_match" then
-		privs.noclip, privs.fast, privs.fly = false, true, false -- allow fast movement to get to a specific point on the large map
+		privs.noclip, privs.fast, privs.fly, privs.interact = false, true, false, false -- allow fast movement to get to a specific point on the large map
 
 		make_player_invisible(player)
 
@@ -115,9 +115,9 @@ function set_player_mode(player, mode)
 
 			label[3,0.1;Change class:]
 
-			button[0.3,1;2.5,1;class_sniper;Sniper]
-			button[2.8,1;2.5,1;class_assault;Assault]
-			button[5.3,1;2.5,1;class_shotgun;Shotgun]
+			button[0.3,1;2.5,1;class_sniper;Long-range]
+			button[2.8,1;2.5,1;class_assault;Mid-range]
+			button[5.3,1;2.5,1;class_shotgun;Short-range]
 
     		list[current_player;main;0,2;8,1;]
     		list[current_player;main;0,3.25;8,3;8]
@@ -187,10 +187,6 @@ function start_match()
 end
 
 function end_match()
-	if match_state == "pre_match" or match_state == "not_started" or match_state == "post_match" then
-		return false
-	end
-
 	set_match_state("not_started")
 
 	for _, player in pairs(core.get_connected_players()) do
@@ -389,9 +385,9 @@ core.register_chatcommand("reset", {
 	privs = {match_manager = true},
 	description = "Terminate the match",
 	func = function()
-		local success = end_match()
-		if success then
+		if match_state ~= "pre_match" and match_state ~= "post_match" and match_state ~= "not_started" then
 			core.chat_send_all(core.colorize("red", "Match Terminated"))
+			end_match()
 
 			return true
 		end
