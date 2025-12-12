@@ -1,19 +1,32 @@
 # How to create a map:
 
 Requirements:
+
 [Minetest/Luanti 5.0.0 or later](https://luanti.org/)
+
 [Minetest Game](https://content.luanti.org/packages/Luanti/minetest_game/)
+
 [WorldEdit](https://content.luanti.org/packages/sfan5/worldedit/)
+
 [Simple Shooter Game](https://github.com/a-bad-dev/simple-shooter-game/)
 
 Step 1: Build your map. It must be perfectly square or rectangular and not contain any non-MTG nodes or rails.
+
 Step 2: Surround the playable area in a box made of glass, WorldEdit helps with this.
-Step 3: Create a barrier 4 blocks below the top of the map out of obsidian glass, leaving a 3-block gap of air between the barrier and roof.
+
+Step 3: Create a barrier 4 blocks below the top of the map out of obsidian glass, leaving a 3-block gap of air between 
+the barrier and roof.
+
 Step 4: Select opposite corners of the map with WorldEdit and run `//mtschemcreate map`.
+
 Step 5: Create a folder with the titile of your map in all lowercase with no spaces in `simple-shooter-game/mods/game/maps/maps/`.
+
 Step 6: Copy the file `(Minetest/Luanti install path)/worlds/(name of the world in which you created your map)/schems/map.mts` to `simple-shooter-game/mods/game/maps/maps/(your map's folder)/`.
+
 Step 7: Create a file called `map.lua` in `simple-shooter-game/mods/game/maps/maps/(your map's folder)/`.
+
 Step 8: Open the `map.lua` file in a text editor and put the following content in it:
+
 ```lua
 local map_data = {
 	name = "(Your map name here)",
@@ -30,8 +43,11 @@ local map_data = {
 
 return map_data
 ```
+
 Step 9: Open Minetest/Luanti and create a new world with Simple Shooter Game.
+
 Step 10: Play the world and run `/load (your map name)` followed by `/start`.
+
 Step 11: Verify the map loads and works.
 
 And that's it!
