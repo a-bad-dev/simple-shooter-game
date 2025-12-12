@@ -1,5 +1,7 @@
 # How to create a map:
 
+WARNING: This tutorial is NOT simple, you need more than one brain cell to follow it.
+
 Requirements:
 
 [Minetest/Luanti 5.0.0 or later](https://luanti.org/)
