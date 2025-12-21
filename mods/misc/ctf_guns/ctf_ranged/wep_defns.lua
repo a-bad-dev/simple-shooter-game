@@ -45,7 +45,8 @@ ctf_ranged.simple_register_gun("ctf_ranged:makarov", {
 				  damage = 3,
 				  automatic = false,
 				  fire_interval = 0.6,
-				  liquid_travel_dist = 2
+				  liquid_travel_dist = 2,
+				  scale = 2
 })
 
 ctf_ranged.simple_register_gun("ctf_ranged:mini14", {
@@ -58,6 +59,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:mini14", {
 				  damage = 4,
 				  fire_interval = 0.8,
 				  liquid_travel_dist = 4,
+				  scale = 2
 })
 
 ctf_ranged.simple_register_gun("ctf_ranged:remington870", {
@@ -73,6 +75,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:remington870", {
 				  range = 24,
 				  damage = 1,
 				  fire_interval = 2,
+				  scale = 1.6
 })
 
 ctf_ranged.simple_register_gun("ctf_ranged:thompson", {
@@ -89,6 +92,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:thompson", {
 				  damage = 1,
 				  fire_interval = 0.1,
 				  liquid_travel_dist = 2,
+				  scale = 2
 })
 
 ctf_ranged.simple_register_gun("ctf_ranged:ak47", {
@@ -105,6 +109,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:ak47", {
 				  damage = 2,
 				  fire_interval = 0.15,
 				  liquid_travel_dist = 2,
+				  scale = 1.6
 })
 
 ctf_ranged.simple_register_gun("ctf_ranged:rpk", {
@@ -121,6 +126,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:rpk", {
 				  damage = 2,
 				  fire_interval = 0.15,
 				  liquid_travel_dist = 2,
+				  scale = 1.6
 })
 
 --------------------------
@@ -137,7 +143,8 @@ ctf_ranged.simple_register_gun("ctf_ranged:glock17", {
 				  damage = 3,
 				  automatic = false,
 				  fire_interval = 0.35,
-				  liquid_travel_dist = 2
+				  liquid_travel_dist = 2,
+				  scale = 1.1
 })
 
 ctf_ranged.simple_register_gun("ctf_ranged:svd", {
@@ -151,6 +158,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:svd", {
 				  damage = 5,
 				  fire_interval = 0.75,
 				  liquid_travel_dist = 4,
+				  scale = 2
 })
 
 
@@ -167,6 +175,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:benelli", {
 				  range = 24,
 				  damage = 2,
 				  fire_interval = 2,
+				  scale = 1.4
 })
 
 ctf_ranged.simple_register_gun("ctf_ranged:uzi", {
@@ -183,6 +192,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:uzi", {
 				  damage = 2,
 				  fire_interval = 0.08,
 				  liquid_travel_dist = 2,
+				  scale = 1.3
 })
 
 ctf_ranged.simple_register_gun("ctf_ranged:m16", {
@@ -199,6 +209,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:m16", {
 				  damage = 2,
 				  fire_interval = 0.15,
 				  liquid_travel_dist = 2,
+				  scale = 1.5
 })
 
 ctf_ranged.simple_register_gun("ctf_ranged:m60", {
@@ -215,6 +226,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:m60", {
 				  damage = 2,
 				  fire_interval = 0.15,
 				  liquid_travel_dist = 2,
+				  scale = 2
 })
 
 --------------------------
@@ -231,7 +243,8 @@ ctf_ranged.simple_register_gun("ctf_ranged:deagle", {
 				  damage = 5,
 				  automatic = false,
 				  fire_interval = 0.5,
-				  liquid_travel_dist = 2
+				  liquid_travel_dist = 2,
+				  scale = 1.2
 })
 
 ctf_ranged.simple_register_gun("ctf_ranged:m200", {
@@ -245,6 +258,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:m200", {
 				  damage = 15,
 				  fire_interval = 2.0,
 				  liquid_travel_dist = 4,
+				  scale = 2
 })
 
 ctf_ranged.simple_register_gun("ctf_ranged:jackhammer", {
@@ -261,6 +275,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:jackhammer", {
 				  range = 24,
 				  damage = 2,
 				  fire_interval = 0.5,
+				  scale = 1.8
 })
 
 ctf_ranged.simple_register_gun("ctf_ranged:mp5", {
@@ -277,6 +292,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:mp5", {
 				  damage = 3,
 				  fire_interval = 0.08,
 				  liquid_travel_dist = 25,
+				  scale = 1.3
 })
 
 ctf_ranged.simple_register_gun("ctf_ranged:scar", {
@@ -293,6 +309,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:scar", {
 				  damage = 6,
 				  fire_interval = 0.2,
 				  liquid_travel_dist = 2,
+				  scale = 1.3
 })
 
 ctf_ranged.simple_register_gun("ctf_ranged:minigun", {
@@ -309,6 +326,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:minigun", {
 				  damage = 4,
 				  fire_interval = 0.08,
 				  liquid_travel_dist = 2,
+				  scale = 2
 })
 
 
@@ -331,6 +349,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:python", {
 				  damage = 5,
 				  fire_interval = 0.8,
 				  liquid_travel_dist = 2,
+				  scale = 1
 })
 
 ctf_ranged.simple_register_gun("ctf_ranged:g11", {
@@ -361,7 +380,8 @@ ctf_ranged.simple_register_gun("ctf_ranged:deagle_gold", {
 				  damage = 5,
 				  automatic = false,
 				  fire_interval = 0.5,
-				  liquid_travel_dist = 2
+				  liquid_travel_dist = 2,
+				  scale = 1.2
 })
 
 

@@ -119,6 +119,7 @@ function ctf_ranged.simple_register_gun(name, def)
 							    ctf_guns_scope_zoom = def.scope_zoom or nil,
 							    inventory_image = def.texture.."^[colorize:#F44:42",
 							    ammo = def.ammo or "ctf_ranged:ammo",
+							    wield_scale = {x = def.scale or 1.25, y = def.scale or 1.25, z = 1.15},
 								bullet_image = def.bullet_image,
 								bullethole_image = def.bullethole_image,
 							    rounds = def.rounds,
