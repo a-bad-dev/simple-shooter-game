@@ -42,7 +42,7 @@ local map_data = {
 	spawn_y = nil,
 	spawn_z = nil,
 	
-	start_time = (Amount of time in seconds before the barrier is removed)
+	start_time = (Amount of time in seconds before the barrier is removed),
 
     scripts = {
         on_start = "(Lua script to be run after /start is run, leave blank unless you know what you are doing!)",
@@ -56,7 +56,7 @@ return map_data
 
 Step 9: Open Minetest/Luanti and create a new world with Simple Shooter Game.
 
-Step 10: Play the world and run `/load (your map name)` followed by `/start`.
+Step 10: Play the world and run `/start (your map name)`.
 
 Step 11: Verify the map loads and works.
 
