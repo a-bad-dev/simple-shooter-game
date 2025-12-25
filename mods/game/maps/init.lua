@@ -16,6 +16,29 @@ function place_map(map)
 	if map_data.start_time == nil or map_data.start_time <= 0 then
 		map_data.start_time = 30
 	end
+
+	if map_data.classes == nil then
+		map_data.classes = {}
+		map_data.classes.class_1 = {}
+		map_data.classes.class_2 = {}
+		map_data.classes.class_3 = {}
+	end
+	
+	if map_data.classes.class_1.initial_items == nil or map_data.classes.class_1.name == nil then
+		map_data.classes.class_1.initial_items = {"ctf_ranged:m200_loaded", "default:sword_stone", "ctf_ranged:ammo 100"}
+		map_data.classes.class_1.name = "Long-range"
+	end
+
+	if map_data.classes.class_2.initial_items == nil or map_data.classes.class_2.name == nil then
+		map_data.classes.class_2.initial_items = {"ctf_ranged:ak47_loaded", "ctf_ranged:glock17_loaded", "ctf_ranged:ammo 100"}
+		map_data.classes.class_2.name = "Mid-range"
+	end
+
+	if map_data.classes.class_3.initial_items == nil or map_data.classes.class_3.name == nil then
+		map_data.classes.class_3.initial_items = {"ctf_ranged:benelli_loaded", "ctf_ranged:glock17_loaded", "ctf_ranged:ammo 100"}
+		map_data.classes.class_3.name = "Short-range"
+	end
+
 	
 	return map_data
 end

@@ -48,7 +48,24 @@ local map_data = {
         on_start = "(Lua script to be run after /start is run, leave blank unless you know what you are doing!)",
         on_barrier_remove = "(Lua script to be run after the barrier is removed, leave blank unless you know what you are doing!)",
         on_end = "(Lua script to be run after the match has ended, leave blank unless you know what you are doing!)"
-    }
+    },
+
+	classes = {
+		class_1 = {
+			name = "(Name of class #1 here)", 
+			initial_items = {"(Initial item #1 for class #1)", "(Initial item #2 for class #1...)"}
+		},
+
+		class_2 = {
+			name = "(Name of class #2 here)",
+			initial_items = {"(Initial item #1 for class #2)", "(Initial item #2 for class #2...)"}
+		},
+
+		class_3 = {
+			name = "(Name of class #3 here)",
+			initial_items = {"(Initial item #1 for class #3)", "(Initial item #2 for class #3...)"}
+		}
+	}
 }
 
 return map_data

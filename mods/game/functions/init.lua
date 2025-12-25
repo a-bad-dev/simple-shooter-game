@@ -16,18 +16,20 @@ function give_player_items(player) -- Give the player their initial stuff
 
 	inv:set_list("main", {})
 
-	if class == "sniper" then
-		inv:add_item("main", "ctf_ranged:m200_loaded")
-		inv:add_item("main", "default:sword_stone")
-		inv:add_item("main", "ctf_ranged:ammo 100")
-	elseif class == "assault" then
-		inv:add_item("main", "ctf_ranged:ak47_loaded")
-		inv:add_item("main", "ctf_ranged:glock17_loaded")
-		inv:add_item("main", "ctf_ranged:ammo 100")
-	elseif class == "shotgun" then
-		inv:add_item("main", "ctf_ranged:benelli_loaded")
-		inv:add_item("main", "ctf_ranged:glock17_loaded")
-		inv:add_item("main", "ctf_ranged:ammo 100")
+	if class == "1" then
+		for i = 1, #map_data.classes.class_1.initial_items do
+			inv:add_item("main", map_data.classes.class_1.initial_items[i])
+		end
+
+	elseif class == "2" then
+		for i = 1, #map_data.classes.class_2.initial_items do
+			inv:add_item("main", map_data.classes.class_2.initial_items[i])
+		end
+		
+	elseif class == "3" then
+		for i = 1, #map_data.classes.class_3.initial_items do
+			inv:add_item("main", map_data.classes.class_3.initial_items[i])
+		end
 	end
 end
 
@@ -89,9 +91,9 @@ function set_player_mode(player, mode) -- Set player mode (spectator, pre-match,
 
 			label[3,0.1;Change class:]
 
-			button[0.3,1;2.5,1;class_sniper;Long-range]
-			button[2.8,1;2.5,1;class_assault;Mid-range]
-			button[5.3,1;2.5,1;class_shotgun;Short-range]
+			button[0.3,1;2.5,1;class_sniper;]]  .. map_data.classes.class_1.name .. [[] 
+			button[2.8,1;2.5,1;class_assault;]] .. map_data.classes.class_2.name .. [[]
+			button[5.3,1;2.5,1;class_shotgun;]] .. map_data.classes.class_3.name .. [[]
 
     		list[current_player;main;0,2;8,1;]
     		list[current_player;main;0,3.25;8,3;8]
@@ -132,7 +134,7 @@ function start_match(map) -- Start the match
 
 	for i = 10, 1, -1 do -- count down from 10 to 1 (yes you are free to set me on fire for this horrible solution)
 		core.after(map_data.start_time - 10 + i, function()
-			core.chat_send_all(core.colorize("green", string.format("Match starts in %d second%s.", (11 - i), 11 - i == 1 and "" or "s"))) -- <-- RIP readability
+			core.chat_send_all(core.colorize("green", string.format("Match starts in %d second%s.", 11 - i, 11 - i == 1 and "" or "s"))) -- <- RIP readability
 		end)
 	end
 

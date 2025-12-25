@@ -51,7 +51,7 @@ core.register_on_joinplayer(function(player)
 	})
 
 	if player:get_meta():get_string("class") == "" then
-		player:get_meta():set_string("class", "assault")
+		player:get_meta():set_string("class", "2") -- Assault
 	end
 
 	set_player_mode(player, "normal")
@@ -91,13 +91,13 @@ core.register_on_player_receive_fields(function(player, formname, fields)
 	end
 
 	if fields.class_sniper then
-		player:get_meta():set_string("class", "sniper")
+		player:get_meta():set_string("class", "1")
 		give_player_items(player)
 	elseif fields.class_assault then
-		player:get_meta():set_string("class", "assault")
+		player:get_meta():set_string("class", "2")
 		give_player_items(player)
 	elseif fields.class_shotgun then
-		player:get_meta():set_string("class", "shotgun")
+		player:get_meta():set_string("class", "3")
 		give_player_items(player)
 	end
 end)
