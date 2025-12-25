@@ -1,6 +1,7 @@
 Lines starting with "!" are high priority
 TODO:
 
+!- Add namespacing (`ssg.xyz()`)
 !- Fix mapgen breaking when hosting from a dedicated server instead of the mainmenu (sometimes .-.)
 -- GUIs to do everything
 -- Improve the maps by adding structures
@@ -9,6 +10,6 @@ TODO:
 !- Make guns zoom in with a crosshair while rightclick is held
 -- Header, screenshot, and icon
 -- Polish the game
-!- Rewrite the main mod from scratch with higher code standards
+-- Rewrite the main mod from scratch with higher code standards
 -- A scoring system with leaderboards
 -- Implement configurable teams
