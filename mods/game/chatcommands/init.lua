@@ -18,7 +18,7 @@ core.register_chatcommand("start", {
 	end
 })
 
-core.register_chatcommand("reset", {
+core.register_chatcommand("stop", {
 	params = "",
 	privs = {match_manager = true},
 	description = "Terminate the match",
