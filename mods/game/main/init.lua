@@ -1,6 +1,7 @@
 -- Main mod for SSG
 
 -- Variables
+automatic_start = {true, false}
 alive_players = {}
 map_data = {}
 spawn_pos = vector.new(-100, -9.6, -100)
@@ -29,6 +30,24 @@ core.register_on_mods_loaded(function()
 		end
 
 		core.override_item(itemname, {groups = groups})
+	end
+end)
+
+core.register_globalstep(function() -- automatically start a match every 30s
+	if (not automatic_start[1]) or automatic_start[2] then
+		return
+	end
+
+	local players = 0
+	for _, _ in ipairs(core.get_connected_players()) do 
+		players = players + 1
+	end
+	if players > 1 and match_state == "not_started" then
+		core.chat_send_all(core.colorize("lime", "-!- Automatically starting new match in 30 seconds"))
+		automatic_start[2] = true
+		core.after(30, function()
+			start_match("forest")
+		end)
 	end
 end)
 
