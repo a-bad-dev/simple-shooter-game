@@ -254,7 +254,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:m200", {
 				  fire_sound = "ctf_ranged_m16fire",
 				  rounds = 5,
 				  scope_zoom=10,
-				  range = 200,
+				  range = 2000,
 				  damage = 15,
 				  fire_interval = 2.0,
 				  liquid_travel_dist = 4,
