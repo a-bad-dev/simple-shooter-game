@@ -6,6 +6,8 @@ Requirements:
 
 [Minetest/Luanti 5.0.0 or later](https://luanti.org/)
 
+(you need at least 5.0.0 to make the map, but you need a more recent version to actually test it)
+
 [Minetest Game](https://content.luanti.org/packages/Luanti/minetest_game/)
 
 [WorldEdit](https://content.luanti.org/packages/sfan5/worldedit/)
