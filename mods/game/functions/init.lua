@@ -130,10 +130,10 @@ function start_match(map) -- Start the match
 		return
 	end
 
-	map_data = place_map(map or "forest") -- default to forest if no map is specified
+	place_map(map or "forest") -- default to forest if no map is specified
 
-	if map_data == "nope :(" then
-		return map_data
+	if map_data == nil then
+		return "nope :("
 	end
 
 	set_match_state("pre_match")
