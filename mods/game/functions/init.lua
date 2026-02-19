@@ -135,8 +135,6 @@ function start_match(map) -- Start the match
 	if map_data == nil then
 		return "nope :("
 	end
-
-	set_match_state("pre_match")
 	
 	local map_loading_images = {}
 	for _, player in pairs(core.get_connected_players()) do
@@ -169,6 +167,8 @@ function start_match(map) -- Start the match
 	end
 	
 	core.after(3, function()
+		set_match_state("pre_match")
+
 		for _, player in pairs(core.get_connected_players()) do
 			player:set_pos(map_data.spawn)
 			
