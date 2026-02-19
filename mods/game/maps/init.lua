@@ -50,11 +50,10 @@ function place_map(map)
 	return map_data
 end
 
-function remove_barrier(x, y, z)
-	for node_x = 1, x - 2 do
-		for node_z = 1, z - 2 do
-			core.set_node({x = node_x, y = y - 1, z = node_z}, {name = "air"}) -- account for the fact that lua counts starting at 1... i think.... whatever, it works \_('_')_/
-		end
+function remove_barrier(x, y, z) -- name and arguments kept for backwards compat
+	for _, player in pairs(core.get_connected_players()) do
+		local pos = player:get_pos()
+		player:set_pos({x=pos.x, y=map_data.barrier_level - 3.5, z=pos.z})
 	end
 	assert(loadstring(map_data.scripts.on_barrier_remove or ""))()
 	return ""
