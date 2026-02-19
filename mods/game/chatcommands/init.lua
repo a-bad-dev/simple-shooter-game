@@ -15,7 +15,7 @@ core.register_chatcommand("start", {
 		
 		local sucess = start_match(param)
 
-		if map_data == "nope :(" then
+		if not map_data then
 			return false, "-!- Map not found!"
 		end
 

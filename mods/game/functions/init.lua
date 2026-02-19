@@ -117,8 +117,8 @@ function start_match(map) -- Start the match
 
 	map_data = place_map(map or "forest") -- default to forest if no map is specified
 
-	if map_data == "nope :(" then
-		return map_data
+	if not map_data then
+		return nil
 	end
 
 	set_match_state("pre_match")
@@ -191,7 +191,7 @@ function end_match() -- End the match
 	set_match_state("not_started")
 
 	for _, player in pairs(core.get_connected_players()) do
-		player:set_pos -- name kept for backwards compat(spawn_pos)
+		player:set_pos(spawn_pos)
 		player:get_inventory():set_list("main", {})
 
 		player:set_inventory_formspec([[

@@ -7,7 +7,7 @@ function place_map(map)
 		if map_list[i] == map then
 			break
 		elseif i == #map_list then
-			return "nope :("
+			return nil
 		end
 	end
 
