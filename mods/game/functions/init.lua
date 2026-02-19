@@ -133,7 +133,7 @@ function start_match(map) -- Start the match
 	place_map(map or "forest") -- default to forest if no map is specified
 
 	if not map_data then
-		return "nope :("
+		return nil
 	end
 	
 	local map_loading_images = {}
