@@ -38,11 +38,12 @@ core.register_on_joinplayer(function(player)
 	player:get_inventory():set_list("main", {})
 
 	player:set_inventory_formspec([[
-    		size[8,4]
-    		list[current_player;main;0,0;8,1;]
-    		list[current_player;main;0,1.25;8,3;8]
-    		listring[current_player;main]
+		size[8,4]
+		list[current_player;main;0,0;8,1;]
+		list[current_player;main;0,1.25;8,3;8]
+		listring[current_player;main]
 	]])
+
 	player:set_properties({pointable = false})
 
 	player:hud_set_flags({
@@ -59,13 +60,13 @@ end)
 
 core.register_on_leaveplayer(function(player)
 	local player_name = player:get_player_name()
-	
+
 	kill_player(player, "left the game")
 end)
 
 core.register_on_dieplayer(function(player)
 	local player_name = player:get_player_name()
-	
+
 	kill_player(player, "died")
 end)
 
@@ -77,7 +78,7 @@ core.register_on_respawnplayer(function(player)
 
 		player:set_pos({x = map_data.spawn_x, y = map_data.spawn_y, z = map_data.spawn_z})
 		player:get_inventory():set_list("main", {})
-	
+
 		player:set_properties({pointable = false})
 	end
 

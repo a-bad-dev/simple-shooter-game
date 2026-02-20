@@ -12,7 +12,7 @@ core.register_chatcommand("start", {
 		if match_state == "pre_match" or match_state == "post_match" or match_state == "in_progress" then
 			return false, "-!- Match is already in progress!"
 		end
-		
+
 		local sucess = start_match(param)
 
 		if not map_data then

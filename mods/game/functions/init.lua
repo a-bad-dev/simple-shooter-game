@@ -25,7 +25,7 @@ function give_player_items(player) -- Give the player their initial stuff
 		for i = 1, #map_data.classes.class_2.initial_items do
 			inv:add_item("main", map_data.classes.class_2.initial_items[i])
 		end
-		
+
 	elseif class == "3" then
 		for i = 1, #map_data.classes.class_3.initial_items do
 			inv:add_item("main", map_data.classes.class_3.initial_items[i])
@@ -50,17 +50,18 @@ function set_player_mode(player, mode) -- Set player mode (spectator, pre-match,
 		playertag.set(player, playertag.TYPE_ENTITY, {a = 255, r = 255, g = 255, b = 255})
 
 		player:set_inventory_formspec([[
-    		size[8,4]
-    		list[current_player;main;0,0;8,1;]
-    		list[current_player;main;0,1.25;8,3;8]
-    		listring[current_player;main]
+			size[8,4]
+			list[current_player;main;0,0;8,1;]
+			list[current_player;main;0,1.25;8,3;8]
+			listring[current_player;main]
 		]])
 
 		player:hud_set_flags({
 			hotbar = true,
 			healthbar = true,
 			breathbar = true,
-		})		
+		})
+
 	elseif mode == "spectator" then
 		privs.noclip, privs.fast, privs.fly, privs.interact, privs.debug = true, true, true, false, true
 
@@ -69,10 +70,10 @@ function set_player_mode(player, mode) -- Set player mode (spectator, pre-match,
 		core.chat_send_player(player_name, core.colorize("#0574fc", "You are now a spectator."))
 
 		player:set_inventory_formspec([[
-    		size[8,4]
-    		list[current_player;main;0,0;8,1;]
-    		list[current_player;main;0,1.25;8,3;8]
-    		listring[current_player;main]
+			size[8,4]
+			list[current_player;main;0,0;8,1;]
+			list[current_player;main;0,1.25;8,3;8]
+			listring[current_player;main]
 		]])
 
 		player:hud_set_flags({
@@ -87,17 +88,17 @@ function set_player_mode(player, mode) -- Set player mode (spectator, pre-match,
 		make_player_invisible(player)
 
 		player:set_inventory_formspec([[
-    		size[8,6]
+			size[8,6]
 
 			label[3,0.1;Change class:]
 
-			button[0.3,1;2.5,1;class_sniper;]]  .. map_data.classes.class_1.name .. [[] 
+			button[0.3,1;2.5,1;class_sniper;]]  .. map_data.classes.class_1.name .. [[]
 			button[2.8,1;2.5,1;class_assault;]] .. map_data.classes.class_2.name .. [[]
 			button[5.3,1;2.5,1;class_shotgun;]] .. map_data.classes.class_3.name .. [[]
 
-    		list[current_player;main;0,2;8,1;]
-    		list[current_player;main;0,3.25;8,3;8]
-    		listring[current_player;main]
+			list[current_player;main;0,2;8,1;]
+			list[current_player;main;0,3.25;8,3;8]
+			listring[current_player;main]
 		]])
 
 		player:hud_set_flags({
@@ -122,11 +123,11 @@ function start_match(map) -- Start the match
 	end
 
 	set_match_state("pre_match")
-	
+
 	local map_loading_images = {}
 	for _, player in pairs(core.get_connected_players()) do
 		set_player_mode(player, "pre_match")
-		
+
 		map_loading_images[player:get_player_name()] = player:hud_add({
 			type      = "image",
 			position  = {x=0.5, y=0.5},
@@ -142,16 +143,16 @@ function start_match(map) -- Start the match
 
 		player:set_hp(20)
 	end
-	
+
 	core.after(3, function()
 		for _, player in pairs(core.get_connected_players()) do
 			player:set_pos({x = map_data.spawn_x, y = map_data.spawn_y, z = map_data.spawn_z})
 			player:hud_remove(map_loading_images[player:get_player_name()])
 		end
 
-	
+
 		assert(loadstring(map_data.scripts.on_start or ""))()
-		
+
 		core.chat_send_all(core.colorize("#b011f9", string.format("Match about to start in %d seconds!\nOpen inventory to change class!", map_data.start_time)))
 
 		for i = 10, 1, -1 do -- count down from 10 to 1 (yes you are free to set me on fire for this horrible solution)
@@ -163,7 +164,7 @@ function start_match(map) -- Start the match
 		core.after(map_data.start_time, function()
 			set_match_state("in_progress")
 			core.chat_send_all(core.colorize("green", "Match started!"))
-		
+
 			remove_barrier()
 
 			alive_players = {}
@@ -195,12 +196,11 @@ function end_match() -- End the match
 		player:get_inventory():set_list("main", {})
 
 		player:set_inventory_formspec([[
-    		size[8,4]
-    		list[current_player;main;0,0;8,1;]
-    		list[current_player;main;0,1.25;8,3;8]
-    		listring[current_player;main]
+			size[8,4]
+			list[current_player;main;0,0;8,1;]
+			list[current_player;main;0,1.25;8,3;8]
+			listring[current_player;main]
 		]])
-
 
 		player:set_properties({pointable = false})
 
@@ -221,11 +221,11 @@ function save_player_data(player) -- Save the player's skin storing it in their 
 	if skins[1] == "blank.png" then
 		return
 	end
-		
+
 	player:get_meta():set_string("skin", core.serialize(skins))
 end
 
-function load_player_data(player) -- Load the player's skin stored in their metadata	
+function load_player_data(player) -- Load the player's skin stored in their metadata
 	local skins = core.deserialize(player:get_meta():get_string("skin"))
 
 	player:set_properties({
@@ -250,7 +250,7 @@ function kill_player(player, reason) -- Handle killed/disconnected players prope
 	if #alive_player_names == 1 then
 		local winner_name = alive_player_names[1]
 		core.chat_send_all(core.colorize("green", winner_name .. " is the winner!"))
-		
+
 		assert(loadstring(map_data.scripts.on_end or ""))()
 
 		set_match_state("post_match")
