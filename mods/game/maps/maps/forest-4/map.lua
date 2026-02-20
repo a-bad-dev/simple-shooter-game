@@ -14,7 +14,7 @@ return {
 
 	classes = {
 		class_1 = {
-			name = "Long-range", 
+			name = "Long-range",
 			initial_items = {"ctf_ranged:m200_loaded", "default:sword_stone", "ctf_ranged:ammo 99", "default:torch 1"}
 		},
 

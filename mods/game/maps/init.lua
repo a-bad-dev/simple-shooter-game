@@ -27,7 +27,7 @@ function place_map(map)
 	else
 		map_data.spawn = map_data.spawn + map_pos
 	end
-	
+
 	if map_data.start_time == nil or map_data.start_time <= 0 then
 		map_data.start_time = 30
 	end
@@ -38,7 +38,7 @@ function place_map(map)
 		map_data.classes.class_2 = {}
 		map_data.classes.class_3 = {}
 	end
-	
+
 	if map_data.classes.class_1.initial_items == nil or map_data.classes.class_1.name == nil then
 		map_data.classes.class_1.initial_items = {"ctf_ranged:m200_loaded", "default:sword_stone", "ctf_ranged:ammo 99"}
 		map_data.classes.class_1.name = "Long-range"
