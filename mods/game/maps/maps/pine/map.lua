@@ -1,22 +1,14 @@
-local map_data = {
+return {
 	name = "pine",
-	size_x = 111,
-	size_y = 64,
-	size_z = 107,
-
+	size = vector.new(111, 64, 107),
+	
 	barrier_level = 60, -- <- Y level of the barrier
-
-	spawn_x = nil,
-	spawn_y = nil,
-	spawn_z = nil,
-
+	
+	spawn = nil,
+	
 	start_time = 30,
 
-	scripts = {
-		on_start = "",
-		on_barrier_remove = "",
-		on_end = ""
-	}
+	on_start 		  = nil,
+	on_end 			  = nil,
+	on_barrier_remove = nil,
 }
-
-return map_data

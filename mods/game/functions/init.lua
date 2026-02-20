@@ -1,3 +1,17 @@
+match_start_jobs = {}
+loading_tips = {
+	"Open the inventory to change class!",
+	"Short-range is good for small/dense maps!",
+	"Mid-range is good on maps with long tunnels or open areas!",
+	"Long-range is good for maps with really open and large areas!",
+	"Ambushing can be powerful assuming you're not found!",
+	"Players may sneak up on you from behind!",
+	"You *can't* be shot under water!",
+	"The Short-range class can one-shot from 6 to 7 nodes away!",
+	"Using torches may allow enemies to sneak up on you in the dark!",
+	"e s p i o n a g e",
+}
+
 -- Functions for SSG
 function make_player_invisible(player) -- Hide a player (pre-match and spectator)
 	save_player_data(player)
@@ -116,52 +130,68 @@ function start_match(map) -- Start the match
 		return
 	end
 
-	map_data = place_map(map or "forest") -- default to forest if no map is specified
+	place_map(map or "forest") -- default to forest if no map is specified
 
 	if not map_data then
 		return nil
 	end
-
-	set_match_state("pre_match")
-
+	
 	local map_loading_images = {}
 	for _, player in pairs(core.get_connected_players()) do
 		set_player_mode(player, "pre_match")
-
-		map_loading_images[player:get_player_name()] = player:hud_add({
-			type      = "image",
-			position  = {x=0.5, y=0.5},
-			image_scale = 100,
-			text      = "map_loading.png",
-			scale     = {x=-100, y=-100},
-			z_index = 1000,
-		})
+		
+		map_loading_images[player:get_player_name()] = {
+			loading = player:hud_add({
+				type      = "image",
+				position  = {x=0.5, y=0.5},
+				image_scale = 100,
+				text      = "map_loading.png",
+				scale     = {x=-100, y=-100},
+				z_index = 1000,
+			}),
+			
+			info = player:hud_add({
+				type      = "text",
+				position  = {x=0.5, y=0.7},
+				text      = loading_tips[math.random(1, #loading_tips)],
+				number 	  = 0xFFFFFF,
+				z_index = 1000,
+			})
+		}
 
 		give_player_items(player)
 
-		player:set_pos({x = map_data.spawn_x, y = map_data.spawn_y, z = map_data.spawn_z})
+		player:set_pos(map_data.spawn)
 
 		player:set_hp(20)
 	end
 
 	core.after(3, function()
+		set_match_state("pre_match")
+
 		for _, player in pairs(core.get_connected_players()) do
-			player:set_pos({x = map_data.spawn_x, y = map_data.spawn_y, z = map_data.spawn_z})
-			player:hud_remove(map_loading_images[player:get_player_name()])
+			player:set_pos(map_data.spawn)
+			
+			for _, id in pairs(map_loading_images[player:get_player_name()]) do
+				player:hud_remove(id)
+			end
 		end
 
-
-		assert(loadstring(map_data.scripts.on_start or ""))()
-
+		if map_data.on_start then
+			map_data.on_start()
+		end
+		
 		core.chat_send_all(core.colorize("#b011f9", string.format("Match about to start in %d seconds!\nOpen inventory to change class!", map_data.start_time)))
 
+		match_start_jobs = {countdown = {}, map = nil}
 		for i = 10, 1, -1 do -- count down from 10 to 1 (yes you are free to set me on fire for this horrible solution)
-			core.after(map_data.start_time - 10 + i, function()
+			table.insert(match_start_jobs.countdown, core.after(map_data.start_time - 10 + i, function()
 				core.chat_send_all(core.colorize("green", string.format("Match starts in %d second%s.", 11 - i, 11 - i == 1 and "" or "s"))) -- <- RIP readability
-			end)
+			end))
 		end
 
-		core.after(map_data.start_time, function()
+		match_start_jobs.map = core.after(map_data.start_time, function()
+			match_start_jobs = nil
 			set_match_state("in_progress")
 			core.chat_send_all(core.colorize("green", "Match started!"))
 
@@ -190,6 +220,20 @@ end
 
 function end_match() -- End the match
 	set_match_state("not_started")
+
+	if match_start_jobs then
+		match_start_jobs.map:cancel()
+
+		for _, job in pairs(match_start_jobs.countdown) do
+			job:cancel()
+		end
+
+		match_start_jobs = nil
+	end
+
+	if map_data.on_end then
+		map_data.on_end()
+	end
 
 	for _, player in pairs(core.get_connected_players()) do
 		player:set_pos(spawn_pos)
@@ -250,8 +294,6 @@ function kill_player(player, reason) -- Handle killed/disconnected players prope
 	if #alive_player_names == 1 then
 		local winner_name = alive_player_names[1]
 		core.chat_send_all(core.colorize("green", winner_name .. " is the winner!"))
-
-		assert(loadstring(map_data.scripts.on_end or ""))()
 
 		set_match_state("post_match")
 

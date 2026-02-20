@@ -76,7 +76,7 @@ core.register_on_respawnplayer(function(player)
 	if match_state == "in_progress" or match_state == "post_match" then
 		set_player_mode(player, "spectator")
 
-		player:set_pos({x = map_data.spawn_x, y = map_data.spawn_y, z = map_data.spawn_z})
+		player:set_pos(map_data.spawn)
 		player:get_inventory():set_list("main", {})
 
 		player:set_properties({pointable = false})

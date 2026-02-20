@@ -1,23 +1,31 @@
 -- Maps mod for SSG
+
+local map_path = core.get_modpath("maps") .. "/maps/"
+map_data = {}
+
+map_list = core.get_dir_list(map_path, true)
+table.sort(map_list)
+
 function place_map(map)
-	local map_path = core.get_modpath("maps") .. "/maps/"
-	local map_list = core.get_dir_list(map_path, true)
+	local map_pos = vector.new(0, 0, 0)
 
 	for i = 1, #map_list do
 		if map_list[i] == map then
+			map_pos = vector.new(1000 * (i - 1), 0, 0)
 			break
 		elseif i == #map_list then
 			return nil
 		end
 	end
 
-	local map_data = dofile(map_path .. map .. "/map.lua")
-	core.place_schematic({x=0, y=0, z=0}, map_path .. map .. "/map.mts", 0, nil, true)
-
-	if map_data.spawn_x == nil or map_data.spawn_y == nil or map_data.spawn_z == nil then -- set a default spawnpoint if not set
-		map_data.spawn_x = map_data.size_x / 2
-		map_data.spawn_y = map_data.barrier_level + 1
-		map_data.spawn_z = map_data.size_z / 2
+	map_data = dofile(map_path .. map .. "/map.lua")
+	map_data.pos = map_pos
+	core.place_schematic(map_pos, map_path .. map .. "/map.mts", 0, nil, true)
+	
+	if not map_data.spawn then -- set a default spawnpoint if not set
+		map_data.spawn = vector.new(map_data.size.x / 2, map_data.barrier_level + 1, map_data.size.z / 2) + map_pos
+	else
+		map_data.spawn = map_data.spawn + map_pos
 	end
 
 	if map_data.start_time == nil or map_data.start_time <= 0 then
@@ -45,8 +53,6 @@ function place_map(map)
 		map_data.classes.class_3.initial_items = {"ctf_ranged:benelli_loaded", "ctf_ranged:glock17_loaded", "ctf_ranged:ammo 99"}
 		map_data.classes.class_3.name = "Short-range"
 	end
-
-	return map_data
 end
 
 function remove_barrier()
@@ -54,6 +60,8 @@ function remove_barrier()
 		local pos = player:get_pos()
 		player:set_pos({x=pos.x, y=map_data.barrier_level - 3.5, z=pos.z})
 	end
-	assert(loadstring(map_data.scripts.on_barrier_remove or ""))()
-	return ""
+	
+	if map_data.on_barrier_remove then
+		map_data.on_barrier_remove()
+	end
 end

@@ -34,23 +34,17 @@ Step 8: Open the `map.lua` file in a text editor and put the following content i
 ```lua
 local map_data = {
 	name = "(Your map name here)",
-	size_x = (Size in the X direction of your map),
-	size_y = (Size in the Y direction of your map),
-	size_z = (Size in the Z direction of your map),
+	size = vector.new(Your map size)
 	
 	barrier_level = (Distance from the bottom of the map to the barrier),
 	
-	spawn_x = nil,
-	spawn_y = nil,
-	spawn_z = nil,
+	spawn = vector.new(Your spawn coordinates relative to map position, can be set to nil)
 	
 	start_time = (Amount of time in seconds before the barrier is removed),
 
-    scripts = {
-        on_start = "(Lua script to be run after /start is run, leave blank unless you know what you are doing!)",
-        on_barrier_remove = "(Lua script to be run after the barrier is removed, leave blank unless you know what you are doing!)",
-        on_end = "(Lua script to be run after the match has ended, leave blank unless you know what you are doing!)"
-    },
+    on_start 		  = function(),
+	on_end 	 		  = function(),
+	on_barrier_remove = function(),
 
 	classes = {
 		class_1 = {
@@ -69,8 +63,6 @@ local map_data = {
 		}
 	}
 }
-
-return map_data
 ```
 
 Step 9: Open Minetest/Luanti and create a new world with Simple Shooter Game.

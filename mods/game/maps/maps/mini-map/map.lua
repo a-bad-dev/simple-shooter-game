@@ -1,22 +1,24 @@
-local map_data = {
+return {
 	name = "mini-map",
-	size_x = 8,
-	size_y = 19,
-	size_z = 8,
-
-	barrier_level = 15,
-
-	spawn_x = nil,
-	spawn_y = nil,
-	spawn_z = nil,
-
+	size = vector.new(8, 19, 8),
+	
+	-- This is a ridiculous hack to prevent players from teleporting into the ground..
+	barrier_level = 19,
+	
+	spawn = vector.new(4, 15, 4),
+	
 	start_time = 15,
 
-	scripts = {
-		on_start = "",
-		on_barrier_remove = "",
-		on_end = ""
-	}
+    on_start 		  = nil,
+	on_end 			  = nil,
+	on_barrier_remove = function()
+		local pos  = map_data.pos
+		local size = map_data.size + pos
+		
+		for x = pos.x + 1, size.x - 2 do
+			for z = pos.z + 1, size.z - 2 do
+				core.set_node(vector.new(x, 14, z), {name = "air"})
+			end
+		end
+	end,
 }
-
-return map_data

@@ -1,22 +1,14 @@
-local map_data = {
+return {
 	name = "savanna",
-	size_x = 341,
-	size_y = 83,
-	size_z = 188,
-
+	size = vector.new(341, 83, 188),
+	
 	barrier_level = 79, -- <- Y level of the barrier
-
-	spawn_x = nil,
-	spawn_y = nil,
-	spawn_z = nil,
-
+	
+	spawn = nil,
+	
 	start_time = 45,
 
-	scripts = {
-		on_start = "",
-		on_barrier_remove = "",
-		on_end = ""
-	}
+	on_start 		  = nil,
+	on_end 			  = nil,
+	on_barrier_remove = nil,
 }
-
-return map_data

@@ -1,22 +1,14 @@
-local map_data = {
+return {
 	name = "forest-3",
-	size_x = 537,
-	size_y = 117,
-	size_z = 244,
-
+	size = vector.new(537, 117, 244),
+	
 	barrier_level = 113, -- <- Y level of the barrier
-
-	spawn_x = nil,
-	spawn_y = nil,
-	spawn_z = nil,
-
+	
+	spawn = nil,
+	
 	start_time = 60,
-
-	scripts = {
-		on_start = "",
-		on_barrier_remove = "",
-		on_end = ""
-	}
+	
+	on_start 		  = nil,
+	on_end 			  = nil,
+	on_barrier_remove = nil,
 }
-
-return map_data
